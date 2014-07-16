@@ -1,0 +1,45 @@
+
+#include <stdio.h>
+int main(int argc, char* argv[]){
+
+    int i, fibonacciNumberToDisplay = 0, fibonacciBuffer1, fibonacciBuffer2, fibonacciBufferNext;
+    
+    FILE* fileHandle = fopen( argv[1], "r" );
+
+    if (fileHandle == NULL){
+
+        printf("Error");
+
+    }
+
+    while( fscanf(fileHandle, "%d\n", &fibonacciNumberToDisplay) != EOF ){
+
+    	fibonacciBuffer1 = 0;
+    	fibonacciBuffer2 = 1;
+    	fibonacciBufferNext = 1;
+
+        for( i = 1; i < fibonacciNumberToDisplay; i++){
+
+            if( fibonacciNumberToDisplay <= 1 ) {
+
+                fibonacciBufferNext = i;
+
+            }
+
+            else {
+
+                fibonacciBufferNext = fibonacciBuffer1 + fibonacciBuffer2;
+                fibonacciBuffer1 = fibonacciBuffer2;
+                fibonacciBuffer2 = fibonacciBufferNext;
+
+            }
+
+        }
+
+        if(fibonacciNumberToDisplay == 0) printf("0\n");
+        else printf("%d\n", fibonacciBufferNext);
+    }
+    
+    fclose(fileHandle);
+    printf("\n");
+}
