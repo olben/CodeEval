@@ -1,0 +1,21 @@
+#include <stdio.h>
+int main(int argc, char* argv[]) {
+    
+    FILE *fileHandle;
+    int sum = 0, buffer = 0;
+    
+    
+    fileHandle = fopen(argv[1], "r");
+    
+    if ( fileHandle == NULL ){
+        printf("Error opening file.");
+    }
+    
+    while ( fscanf(fileHandle, "%d\n", &buffer) != EOF ){
+        sum += buffer;
+    }
+    
+    fclose(fileHandle);
+    printf("%d", sum);
+        
+}
