@@ -1,0 +1,28 @@
+#include <stdio.h>
+int main(int argc, char* argv[]){
+    
+    int ageBuffer = 0;
+    
+    FILE* fileHandle = fopen(argv[1], "r");
+    
+    if ( fileHandle == NULL ){
+        
+        printf("Error opening file");
+    
+    }
+    
+    while ( fscanf ( fileHandle, "%d\n", &ageBuffer ) != EOF ){
+
+        if ( ageBuffer >= 0  && ageBuffer <= 2 ) printf("Home\n");
+        else if ( ageBuffer >= 3 && ageBuffer <= 4 ) printf("Preschool\n");
+        else if ( ageBuffer >= 5 && ageBuffer <= 11 ) printf("Elementary school\n");
+        else if ( ageBuffer >= 12 && ageBuffer  <= 14 ) printf("Middle school\n");
+        else if ( ageBuffer >= 15 && ageBuffer  <= 18 ) printf("High school\n");
+        else if ( ageBuffer >= 19 && ageBuffer  <= 22 ) printf("College\n");
+        else if ( ageBuffer >= 23 && ageBuffer  <= 65 ) printf("Work\n");
+        else if ( ageBuffer >= 66 && ageBuffer  <= 100 ) printf("Retirement\n");
+        else printf("This program is for humans\n");
+        
+    }
+    
+}
