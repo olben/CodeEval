@@ -1,0 +1,20 @@
+#include <stdio.h>
+int main(int argc, char* argv[1]){
+
+  int scannedHex;
+	FILE *fileHandle = fopen(argv[1], "r");
+
+	if(fileHandle == NULL) printf("Error opening file.");
+
+	else{
+	
+		while(fscanf(fileHandle, "%x", &scannedHex) != EOF){
+		
+			printf("%d\n", scannedHex);
+			
+		}
+	}
+
+  return 0;
+  
+}
