@@ -1,0 +1,25 @@
+#include <stdio.h>
+int main(int argc, char* argv[]){
+    
+    FILE *fileHandle;
+    int buffer = 0;
+    
+    fileHandle = fopen(argv[1], "r");
+    
+    if ( fileHandle == NULL ){
+        
+        printf("Error while opening file.");
+        
+    }
+    
+    while ( fscanf(fileHandle, "%d\n", &buffer) != EOF ){
+       
+        if ( buffer % 2 == 0 ){
+            printf("1\n");
+        }
+        else {
+            printf("0\n");
+        }
+        
+    }
+}
