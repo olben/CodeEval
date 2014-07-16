@@ -1,0 +1,33 @@
+#include <stdio.h>
+
+int main(int argc, char* argv[]){
+
+   FILE * fileHandle;
+
+   int scannedNumber, remainder, sumOfDigits = 0;
+
+   fileHandle = fopen (argv[1],"r");
+
+   if (fileHandle == NULL) printf("Error opening file.");
+
+	   while( fscanf ( fileHandle, "%d", &scannedNumber ) != EOF ){
+
+		   while (scannedNumber > 0){
+
+			   remainder = scannedNumber % 10;
+			   
+			   sumOfDigits += remainder;
+			   
+			   scannedNumber /= 10;
+
+		   }
+		   printf("%d\n", sumOfDigits);
+
+		   sumOfDigits = 0;
+
+	   }
+
+   fclose (fileHandle);
+   return 0;
+
+}
