@@ -1,0 +1,27 @@
+#include <stdio.h>
+
+int main() {
+
+    int i, counter = 0, value = 2, isPrime = 1, sumOfPrimes = 0;
+
+    while (counter < 1000) {
+
+    	for (i = 2; i < value ; i++) {
+
+    		if (value % i == 0) {
+    			isPrime = 0;
+            }
+    	}
+
+            if (isPrime) {
+                    sumOfPrimes += value;
+                    counter++;
+            }
+
+            value++;
+            isPrime = 1;
+    }
+
+    printf("%d", sumOfPrimes);
+    return 0;
+}
