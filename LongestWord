@@ -1,0 +1,52 @@
+#include <stdio.h>
+#include <string.h>
+
+int main(int argc, char * argv[]) {
+
+	int i = 0, j = 0;
+	char scannedString[256], longestWord[256], longestWordBuffer[256];
+
+	memset(scannedString, 0, sizeof (scannedString));
+	memset(longestWordBuffer, 0, sizeof (longestWordBuffer));
+	memset(longestWord, 0, sizeof (longestWord));
+
+	FILE *fileHandle = fopen (argv[1], "r");
+
+	if (fileHandle == NULL) {
+		printf ("Error opening file");
+	}
+	else {
+		while (fgets (scannedString, sizeof (scannedString), fileHandle) != NULL) {
+
+			for (i = 0; i < strlen (scannedString); i++) {
+
+				if (scannedString[i] != ' ' && scannedString[i] != '\n' ){
+					longestWordBuffer[j] = scannedString[i];
+					j++;
+				}
+				else {
+					if (strlen (longestWord) < strlen (longestWordBuffer)) {
+						strcpy (longestWord, longestWordBuffer);
+					}
+
+					j = 0;
+					memset(longestWordBuffer, 0, sizeof (longestWordBuffer));
+
+				}
+			}
+			
+			printf("%s\n", longestWord);
+			
+			j = 0;
+
+			memset(scannedString, 0, sizeof (scannedString));
+			memset(longestWordBuffer, 0, sizeof (longestWordBuffer));
+			memset(longestWord, 0, sizeof (longestWord));
+
+		}
+	}
+
+	fclose (fileHandle);
+	return 0;
+
+}
