@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <string.h>
+
+int main(int argc, char * argv[]){
+
+	int i, index = -1;
+	char scannedString[128];
+	memset (scannedString, 0, sizeof(scannedString));
+
+	FILE *fileHandle = fopen (argv[1], "r");
+
+	if (fileHandle == NULL) {
+		printf ("File opening failed!");
+	}
+
+	else {
+		while (fgets (scannedString, 128, fileHandle)) {
+
+			for (i = 0; i <= strlen(scannedString); i++) {
+
+				if (scannedString[i] == ',' /*|| scannedString[i] == '\n'*/) {
+					break;
+				}
+
+				if (scannedString[i] == scannedString[strlen (scannedString) - 2]) {
+					index = i;
+				}
+			}
+
+			printf ("%d\n", index);
+			index = -1;
+			memset (scannedString, 0, sizeof(scannedString));
+
+		}
+	}
+	
+	fclose(fileHandle);
+	return 0;
+	
+}
