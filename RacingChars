@@ -1,0 +1,78 @@
+
+#include <stdio.h>
+
+int main(int argc, char *argv[]){
+
+	int i, flagCheckpointFound, checkpointFoundAt, startingLine = 1;
+	char scannedPartOfTrack[15];
+	FILE *fileHandle = fopen(argv[1], "r");
+
+	if (fileHandle == NULL) printf("Error opening file");
+	else{
+
+		while (fgets(scannedPartOfTrack, 15, fileHandle) != NULL){
+
+			for(i=0; scannedPartOfTrack[i] != '\0'; i++){
+
+				if(scannedPartOfTrack[i] == 'C'){
+					if(startingLine || i == checkpointFoundAt) {
+						scannedPartOfTrack[i] = '|';
+						checkpointFoundAt = i;
+						flagCheckpointFound = 1;
+						startingLine = 0;
+						break;
+					}
+					else if(i < checkpointFoundAt){
+						scannedPartOfTrack[i] = '/';
+						checkpointFoundAt = i;
+						flagCheckpointFound = 1;
+						startingLine = 0;
+						break;
+					}
+					else {
+						scannedPartOfTrack[i] ='\\';
+						checkpointFoundAt = i;
+						flagCheckpointFound = 1;
+						startingLine = 0;
+						break;
+					}
+				}
+			}
+
+			if(!flagCheckpointFound){
+
+				for(i=0; scannedPartOfTrack[i] != '\0'; i++){
+
+					if(scannedPartOfTrack[i] == '_'){
+						if(startingLine || i == checkpointFoundAt) {
+							scannedPartOfTrack[i] = '|';
+							checkpointFoundAt = i;
+							startingLine = 0;
+							break;
+						}
+						else if(i < checkpointFoundAt){
+							scannedPartOfTrack[i] = '/';
+							checkpointFoundAt = i;
+							startingLine = 0;
+							break;
+						}
+						else {
+							scannedPartOfTrack[i] = '\\';
+							checkpointFoundAt = i;
+							startingLine = 0;
+							break;
+						}
+					}
+				}
+			}
+
+			printf("%s",scannedPartOfTrack);
+			flagCheckpointFound = 0;
+
+		}
+	}
+
+	fclose(fileHandle);
+	return 0;
+
+}
