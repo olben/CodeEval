@@ -1,0 +1,43 @@
+#include <stdio.h>
+
+int main(int argc, char *argv[1])
+{
+
+	int scannedNumber, amountOfCoins, coinBuffer;
+	FILE *fileHandle = fopen (argv[1], "r");
+
+	if (fileHandle == NULL) {
+		printf("Error opening file");
+	}
+
+	else {
+		while (fscanf(fileHandle, "%d", &scannedNumber) != EOF) {
+
+			while(scannedNumber >= amountOfCoins) {
+				amountOfCoins = scannedNumber / 5;
+				scannedNumber %= 5;
+
+				if (scannedNumber >= 3) {
+					coinBuffer = scannedNumber / 3;
+					amountOfCoins += coinBuffer;
+					scannedNumber %= 3;
+				}
+
+				while (scannedNumber > 0) {
+					amountOfCoins++;
+					scannedNumber--;
+				}
+
+				printf ("%d\n", amountOfCoins);
+				amountOfCoins = 0;
+				coinBuffer = 0;
+				break;
+
+			}
+
+		}
+	}
+
+	return 0;
+
+}
