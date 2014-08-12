@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+int main(int argc, char *argv[]) {
+
+	int i, j, letterToCheckIndex, flagFirstFound = 0;
+	char scannedWord[30], letterToCheck, firstNonRepeated;
+	FILE *fileHandle = fopen (argv[1], "r");
+
+	if (fileHandle == NULL) {
+		printf("Error opening file");
+	}
+	else {
+		while (fgets (scannedWord, 30, fileHandle) != NULL) {
+
+			for (i = 0; i <= strlen(scannedWord); i++) {
+				letterToCheck = scannedWord[i];
+				letterToCheckIndex = i;
+
+				if (isalpha (letterToCheck)){
+					for (j = 0; j <= strlen(scannedWord); j++) {
+						if (letterToCheckIndex != j && letterToCheck == scannedWord[j]) {
+							break;
+						}
+
+						else if (j == strlen(scannedWord)) {
+							flagFirstFound = 1;
+						}
+					}
+
+					if (flagFirstFound) {
+						flagFirstFound = 0;
+						printf("%c\n", letterToCheck);
+						break;
+					}
+				}
+			}
+		}
+
+	}
+	return 0;
+}
